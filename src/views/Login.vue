@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="login">
     <form class="form-signin">
       <img
         class="mb-4"
@@ -34,7 +34,7 @@
         required
         v-model="user.password"
       >
-      <div class="checkbox mb-3">
+      <div class="checkbox mb-3 mt-3 remember-me">
         <label>
           <input
             type="checkbox"
@@ -70,10 +70,20 @@ export default {
       vm.$http.post(path, vm.user).then((response) => {
         console.log(response.data);
         if (response.data.success) {
-          vm.$router.push('/');
+          vm.$router.push('/admin/products');
         }
       });
     },
   },
 };
 </script>
+<style lang="scss" scoped>
+.login{
+  text-align: center;
+  width: 30%;
+  margin: auto;
+}
+.remember-me{
+  text-align: left;
+}
+</style>
