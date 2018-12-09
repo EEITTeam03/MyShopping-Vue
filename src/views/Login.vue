@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     signIn() {
-      const path = `${process.env.VUE_APP_APIPATH}/signin`;
+      const path = `${process.env.VUE_APP_APIPATH}/admin/signin`;
       console.log(path);
       const vm = this;
       vm.$http.post(path, vm.user).then((response) => {
