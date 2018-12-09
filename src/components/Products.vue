@@ -99,14 +99,10 @@
                     id="customFile"
                     class="form-control"
                     ref="files"
+                    @change="uploadFile"
                   >
                 </div>
-                <img
-                  v-if="tempProduct.imageUrl"
-                  :src="tempProduct.imageUrl"
-                  class="img-fluid"
-                  alt="商品圖"
-                >
+                <img :src="tempProduct.imageUrl" class="img-fluid" alt="">
               </div>
               <div class="col-sm-8">
                 <div class="form-group">
@@ -215,6 +211,7 @@
             <button
               type="button"
               class="btn btn-primary"
+              @click="updateProduct"
             >確認</button>
           </div>
         </div>
@@ -261,7 +258,7 @@
             <button
               type="button"
               class="btn btn-danger"
-              @click="deleteProduct(tempProduct.id)"
+              @click="deleteProduct"
             >確認刪除</button>
           </div>
         </div>
@@ -288,7 +285,6 @@ export default {
       console.log(path);
       const vm = this;
       vm.$http.get(path).then((response) => {
-        console.log(response.data);
         vm.products = response.data.products;
       });
     },
@@ -306,17 +302,54 @@ export default {
       this.tempProduct = Object.assign({}, item);
       $('#delProductModal').modal('show');
     },
-    deleteProduct(id) {
+    deleteProduct() {
+      const vm = this;
       const path = `${process.env.VUE_APP_APIPATH}/api/${
         process.env.VUE_APP_CUSTOMPATH
-      }/admin/product/${id}`;
+      }/admin/product/${vm.tempProduct.id}`;
       console.log(path);
-      const vm = this;
       vm.$http.delete(path).then((response) => {
         console.log('刪除結果', response.data.success);
         $('#delProductModal').modal('hide');
         vm.getProducts();
       });
+    },
+    updateProduct() {
+      const vm = this;
+      let path = `${process.env.VUE_APP_APIPATH}/api/${
+        process.env.VUE_APP_CUSTOMPATH
+      }/admin/product`;
+      let httpMethod = 'post';
+      // 若是修改
+      if (!vm.isNew) {
+        path = `${process.env.VUE_APP_APIPATH}/api/${
+          process.env.VUE_APP_CUSTOMPATH
+        }/admin/product/${vm.tempProduct.id}`;
+        httpMethod = 'put';
+      }
+      console.log(path);
+      vm.$http[httpMethod](path, { data: vm.tempProduct }).then((response) => {
+        console.log('新增 or 修改結果', response.data);
+        $('#productModal').modal('hide');
+        vm.getProducts();
+      });
+    },
+    uploadFile() {
+      const vm = this;
+      const path = `${process.env.VUE_APP_APIPATH}/api/${
+        process.env.VUE_APP_CUSTOMPATH
+      }/admin/upload`;
+      console.log(vm.$refs.files.files[0]);
+      const uploadedFile = vm.$refs.files.files[0];
+      const formData = new FormData();
+      formData.append('file-to-upload', uploadedFile);
+      vm.$http.post(path, formData, { headers: { 'Content-Type': 'multipart/form-data' } })
+        .then((response) => {
+          console.log(response.data);
+          if (response.data.success) {
+            vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl);
+          }
+        });
     },
   },
   created() {
