@@ -47,6 +47,7 @@
         </tr>
       </tbody>
     </table>
+    <Pagination :page="pagination" @changePage="getProducts"/>
     <!-- Modal -->
     <div
       class="modal fade"
@@ -269,6 +270,7 @@
 </template>
 <script>
 import $ from 'jquery';
+import Pagination from 'components/Pagination.vue';
 
 export default {
   data() {
@@ -278,21 +280,23 @@ export default {
       isNew: false,
       isLoading: false,
       status: {
-        fileLoading: false
-      }
+        fileLoading: false,
+      },
+      pagination: {},
     };
   },
   methods: {
-    getProducts() {
+    getProducts(page = 1) {
       const path = `${process.env.VUE_APP_APIPATH}/api/${
         process.env.VUE_APP_CUSTOMPATH
-      }/admin/products/all`;
+      }/admin/products?page=${page}`;
       console.log(path);
       const vm = this;
       vm.isLoading = true;
       vm.$http.get(path).then((response) => {
         vm.isLoading = false;
         vm.products = response.data.products;
+        vm.pagination = response.data.pagination;
       });
     },
     openModal(isNew, item) {
@@ -365,6 +369,9 @@ export default {
   },
   created() {
     this.getProducts();
+  },
+  components: {
+    Pagination,
   },
 };
 </script>
