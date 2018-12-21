@@ -357,6 +357,8 @@ export default {
           vm.status.fileLoading = false;
           if (response.data.success) {
             vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl);
+          } else {
+            vm.$bus.$emit('messsage:push', response.data.message, 'danger');
           }
         });
     },
