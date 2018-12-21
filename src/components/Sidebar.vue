@@ -3,23 +3,23 @@
     <nav class="col-md-2 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
-          <li class="nav-item">
-            <a
-              class="nav-link active"
-              href="#"
-            >
-              <span data-feather="home"></span>
-              Dashboard <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
+          <li class="nav-item" @click="activeLink('products')">
+            <router-link
               class="nav-link"
-              href="#"
+              to="/admin/products"
+              :class="{'active': isActive.products}"
             >
-              <span data-feather="file"></span>
-              Orders
-            </a>
+              商品列表
+            </router-link>
+          </li>
+          <li class="nav-item" @click="activeLink('orders')">
+            <router-link
+              class="nav-link"
+              to="/admin"
+              :class="{'active': isActive.orders}"
+            >
+              訂單列表
+            </router-link>
           </li>
         </ul>
 
@@ -48,3 +48,26 @@
     </nav>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      isActive: {
+        products: true,
+        orders: false,
+      },
+    };
+  },
+  methods: {
+    activeLink(link) {
+      Object.keys(this.isActive).forEach((element) => {
+        if (link === element) {
+          this.$set(this.isActive, element, true);
+        } else {
+          this.$set(this.isActive, element, false);
+        }
+      });
+    },
+  },
+};
+</script>
