@@ -45,6 +45,14 @@ export default new Router({
           },
         },
         {
+          path: 'coupons',
+          name: 'Coupons',
+          component: () => import('./components/Coupons.vue'),
+          meta: {
+            requiresAuth: true,
+          },
+        },
+        {
           path: 'orders',
           name: 'Orders',
           // component: () => import('./components/Products.vue'),
