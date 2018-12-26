@@ -226,9 +226,6 @@ export default {
       tempCoupon: {},
       isNew: false,
       isLoading: false,
-      status: {
-        fileLoading: false,
-      },
       pagination: {},
     };
   },

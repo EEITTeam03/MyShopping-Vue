@@ -10,12 +10,14 @@ import App from './App.vue';
 import router from './router';
 import './bus';
 import currencyFilter from './filters/currency';
+import dateFilter from './filters/date';
 
 Vue.use(VueAxios, axios);
 Vue.use(VeeValidate);
 Validator.localize('zhTw', zhTwValidate);
 Vue.component('Loading', Loading);
 Vue.filter('currency', currencyFilter);
+Vue.filter('date', dateFilter);
 Vue.config.productionTip = false;
 axios.defaults.withCredentials = true;
 

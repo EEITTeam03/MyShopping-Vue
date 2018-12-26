@@ -41,7 +41,7 @@
 
         <h6 class="sidebar-heading d-flex justify-content-between
             align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Saved reports</span>
+          <span>模擬功能</span>
           <a
             class="d-flex align-items-center text-muted"
             href="#"
@@ -51,13 +51,9 @@
         </h6>
         <ul class="nav flex-column mb-2">
           <li class="nav-item">
-            <a
-              class="nav-link"
-              href="#"
-            >
-              <span data-feather="file-text"></span>
-              Current month
-            </a>
+            <router-link to="/customerOrder" class="nav-link">
+              <i class="fas fa-shopping-cart"></i> 模擬訂單
+            </router-link>
           </li>
         </ul>
       </div>
@@ -68,22 +64,9 @@
 export default {
   data() {
     return {
-      // isActive: {
-      //   products: true,
-      //   orders: false,
-      // }
     };
   },
   methods: {
-    // activeLink(link) {
-    //   Object.keys(this.isActive).forEach(element => {
-    //     if (link === element) {
-    //       this.$set(this.isActive, element, true);
-    //     } else {
-    //       this.$set(this.isActive, element, false);
-    //     }
-    //   });
-    // }
   },
 };
 </script>
