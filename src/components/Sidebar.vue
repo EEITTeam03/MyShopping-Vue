@@ -3,20 +3,18 @@
     <nav class="col-md-2 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
-          <li class="nav-item" @click="activeLink('products')">
+          <li class="nav-item" >
             <router-link
               class="nav-link"
               to="/admin/products"
-              :class="{'active': isActive.products}"
             >
               商品列表
             </router-link>
           </li>
-          <li class="nav-item" @click="activeLink('orders')">
+          <li class="nav-item" >
             <router-link
               class="nav-link"
-              to="/admin"
-              :class="{'active': isActive.orders}"
+              to="/admin/orders"
             >
               訂單列表
             </router-link>
