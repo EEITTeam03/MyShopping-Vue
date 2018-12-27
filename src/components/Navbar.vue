@@ -16,7 +16,7 @@
           <a
             class="nav-link"
             href="#"
-            @click="signOut"
+            @click.prevent="signOut"
           >Sign out</a>
         </li>
       </ul>
