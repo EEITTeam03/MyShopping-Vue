@@ -22,7 +22,7 @@ export default new Router({
       children: [
         {
           path: 'products',
-          name: 'Products',
+          name: 'products',
           component: () => import('./components/Products.vue'),
           meta: {
             requiresAuth: true,
@@ -30,7 +30,7 @@ export default new Router({
         },
         {
           path: 'coupons',
-          name: 'Coupons',
+          name: 'coupons',
           component: () => import('./components/Coupons.vue'),
           meta: {
             requiresAuth: true,
@@ -38,7 +38,7 @@ export default new Router({
         },
         {
           path: 'orders',
-          name: 'Orders',
+          name: 'orders',
           component: () => import('./components/Orders.vue'),
           meta: {
             requiresAuth: true,
@@ -48,6 +48,18 @@ export default new Router({
       meta: {
         requiresAuth: true,
       },
+    },
+    {
+      path: '/hauhaubuy',
+      name: 'shopping',
+      component: () => import('./views/Shopping.vue'),
+      children: [
+        {
+          path: 'customerOrders',
+          name: 'customerOrders',
+          component: () => import('./components/CustomerOrders.vue'),
+        },
+      ],
     },
   ],
 });
