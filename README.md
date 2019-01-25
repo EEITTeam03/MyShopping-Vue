@@ -1,5 +1,7 @@
 # myshopping
 
+> 這是一個 vue 的電商網站練習
+
 ## Project setup
 ```
 npm install
